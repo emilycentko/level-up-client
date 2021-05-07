@@ -37,8 +37,20 @@ export const EventProvider = (props) => {
             .then(response => response.json())
     }
 
+    const leaveEvent = eventId => {
+        return fetch(`http://localhost:8000/events/${ eventId }/signup`, {
+            method: "DELETE",
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("lu_token")}`
+            }
+        })
+            .then(response => response.json())
+            .then(getEvents)
+    }
+    
+
     return (
-        <EventContext.Provider value={{ events, getEvents, createEvent, joinEvent }} >
+        <EventContext.Provider value={{ events, getEvents, createEvent, joinEvent, leaveEvent }} >
             { props.children }
         </EventContext.Provider>
     )
