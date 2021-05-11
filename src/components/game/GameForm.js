@@ -80,7 +80,12 @@ export const GameForm = () => {
         if (gameId) {
           getGameById(gameId)
           .then(game => {
-              setGame(game)
+              setGame({
+                id: game.id,
+                name: game.name,
+                numberOfPlayers: game.number_of_players,
+                difficulty: game.difficulty,
+                gameTypeId: game.game_type.id})
               setIsLoading(false)
           })
         } else {
